@@ -50,6 +50,9 @@ export class AppComponent {
     // this.object().title = 'Overwriting title';
     this.loadEffects();
 
+    const readOnlyCounter = this.counter.asReadonly();
+    // readOnlyCounter.set(5); Throws an error
+
     const manualCleanup = effect(
       (onCleanup) => {
         console.log(`Current value:`, this.counter());
