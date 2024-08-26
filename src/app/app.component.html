@@ -1,6 +1,16 @@
-<h1>Counter: {{ counter() }}</h1>
-<h2>x10: {{ derivedCounter() }}</h2>
+<section>
+  <h1>Primitive values</h1>
+  <h2>Counter: {{ counter() }}</h2>
+  <h3>x10: {{ derivedCounter() }}</h3>
 
-<button type="button" (click)="increment()">Increment</button>
+  <button type="button" (click)="increment()">Increment</button>
 
-<button type="button" (click)="multiplier = 10">Set multiplier to 10</button>
+  <button type="button" (click)="multiplier = 10">Set multiplier to 10</button>
+</section>
+
+<section>
+  <h1>Object & Arrays</h1>
+
+  <pre>{{ list() | json }}</pre>
+  <pre>{{ object() | json }}</pre>
+</section>

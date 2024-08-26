@@ -1,10 +1,11 @@
+import { JsonPipe } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, JsonPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -21,8 +22,18 @@ export class AppComponent {
     }
   });
 
+  list = signal(['Hello', 'World']);
+
+  object = signal({
+    id: 1,
+    title: 'Angular for Beginners',
+  });
+
   constructor() {
     console.log(`counter value: ${this.counter()}`);
+
+    this.list().push('Again');
+    this.object().title = 'Overwriting title';
   }
 
   increment() {
