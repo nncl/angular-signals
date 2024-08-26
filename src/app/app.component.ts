@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, untracked } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   counter = signal(0);
 
-  derivedCounter = computed(() => this.counter() * 10);
+  derivedCounter = computed(() => untracked(this.counter) * 10);
 
   constructor() {
     console.log(`counter value: ${this.counter()}`);
