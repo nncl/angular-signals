@@ -51,8 +51,12 @@ export class AppComponent {
     this.loadEffects();
 
     const manualCleanup = effect(
-      () => {
+      (onCleanup) => {
         console.log(`Current value:`, this.counter());
+
+        onCleanup(() => {
+          console.log(`Performing clean up action here...`);
+        });
       },
       { manualCleanup: true }
     );
