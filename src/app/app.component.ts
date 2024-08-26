@@ -24,20 +24,40 @@ export class AppComponent {
 
   list = signal(['Hello', 'World']);
 
-  object = signal({
-    id: 1,
-    title: 'Angular for Beginners',
+  object = signal(
+    {
+      id: 1,
+      title: 'Angular for Beginners',
+    },
+    // Most cases we're not using this equality custom check
+    {
+      equal: (a, b) => {
+        return a.id === b.id && a.title == b.title;
+      },
+    }
+  );
+
+  title = computed(() => {
+    console.log(`Calling computed function...`);
+    return this.object().title;
   });
 
   constructor() {
     console.log(`counter value: ${this.counter()}`);
 
     this.list().push('Again');
-    this.object().title = 'Overwriting title';
+    // this.object().title = 'Overwriting title';
   }
 
   increment() {
     this.counter.set(this.counter() + 1);
     this.counter.update((counter) => counter + 1);
+  }
+
+  updateObject() {
+    this.object.set({
+      id: 1,
+      title: 'Angular for Beginners',
+    });
   }
 }
