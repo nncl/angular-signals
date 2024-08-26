@@ -1,11 +1,12 @@
 import { JsonPipe } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, JsonPipe],
+  imports: [RouterOutlet, JsonPipe, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -47,6 +48,7 @@ export class AppComponent {
 
     this.list().push('Again');
     // this.object().title = 'Overwriting title';
+    this.loadEffects();
   }
 
   increment() {
@@ -58,6 +60,15 @@ export class AppComponent {
     this.object.set({
       id: 1,
       title: 'Angular for Beginners',
+    });
+  }
+
+  loadEffects() {
+    effect(() => {
+      const currentCount = this.counter();
+      const derivedCounter = this.derivedCounter();
+
+      console.log(`Current values: ${currentCount} ${derivedCounter}`);
     });
   }
 }
