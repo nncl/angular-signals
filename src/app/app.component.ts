@@ -49,6 +49,15 @@ export class AppComponent {
     this.list().push('Again');
     // this.object().title = 'Overwriting title';
     this.loadEffects();
+
+    const manualCleanup = effect(
+      () => {
+        console.log(`Current value:`, this.counter());
+      },
+      { manualCleanup: true }
+    );
+
+    manualCleanup.destroy();
   }
 
   increment() {
