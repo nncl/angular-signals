@@ -11,7 +11,12 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   counter = signal(0);
 
+  constructor() {
+    console.log(`counter value: ${this.counter()}`);
+  }
+
   increment() {
     this.counter.set(this.counter() + 1);
+    this.counter.update((counter) => counter + 1);
   }
 }
