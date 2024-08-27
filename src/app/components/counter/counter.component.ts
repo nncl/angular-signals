@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, inject } from '@angular/core';
+import { CounterServiceService } from '../../services/counter/counter-service.service';
 
 @Component({
   selector: 'app-counter',
@@ -9,16 +10,22 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CounterComponent {
+  private counterService = inject(CounterServiceService);
+
   /**
    * In this example, if we click on the Increment button, the component will be re-rendered, meaning that Signals are integrated directly with OnPush.
    * This means that we no longer need to inject ChangeDetectorRef and invoke
    * markForCheck, to update an OnPush component in this scenario.
    */
 
-  count = signal(0);
+  count: Signal<number>;
+
+  constructor() {
+    this.count = this.counterService.counter;
+  }
 
   increment() {
-    this.count.update((val) => val + 1);
+    this.counterService.increment();
   }
 
   /*
