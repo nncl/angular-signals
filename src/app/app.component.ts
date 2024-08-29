@@ -17,6 +17,8 @@ export class AppComponent {
 
   show = signal(false);
 
+  limit = 5;
+
   derivedCounter = computed(() => {
     if (this.counter() === 0) {
       return 0;
@@ -24,6 +26,8 @@ export class AppComponent {
       return this.counter() * this.multiplier;
     }
   });
+
+  isGreaterThanLimit = computed(() => this.counter() > this.limit);
 
   list = signal(['Hello', 'World']);
 
