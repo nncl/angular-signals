@@ -15,6 +15,8 @@ export class AppComponent {
 
   multiplier = 0;
 
+  show = signal(false);
+
   derivedCounter = computed(() => {
     if (this.counter() === 0) {
       return 0;
