@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, effect, input } from '@angular/core';
 
 @Component({
   selector: 'app-counter-input',
@@ -7,14 +7,16 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
   templateUrl: './counter-input.component.html',
   styleUrl: './counter-input.component.css',
 })
-export class CounterInputComponent implements OnChanges {
-  @Input() value = 0;
+export class CounterInputComponent {
+  // Or input.required<number>();
+  value = input.required({
+    alias: 'counter',
+    transform: (value: number) => value * 100,
+  });
 
-  ngOnChanges(changes: SimpleChanges) {
-    const change = changes['value'];
-
-    if (change) {
-      console.log(`New value: ${change.currentValue}`);
-    }
+  constructor() {
+    effect(() => {
+      console.log(`New value: ${this.value()}`);
+    });
   }
 }
