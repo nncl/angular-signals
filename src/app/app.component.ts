@@ -2,11 +2,19 @@ import { JsonPipe } from '@angular/common';
 import { Component, computed, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { CounterInputComponent } from './components/counter-input/counter-input.component';
+import { CounterComponent } from './components/counter/counter.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, JsonPipe, FormsModule],
+  imports: [
+    RouterOutlet,
+    JsonPipe,
+    FormsModule,
+    CounterComponent,
+    CounterInputComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
